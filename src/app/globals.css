@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #F8F1EB;
+  --color-beige: #E8D7C9;
+  --color-rose-blush: #B8787D;
+  --color-rose-gold: #B58A68;
+  --color-charcoal: #292522;
+  --color-cream-dark: #EDE3D9;
+  --color-beige-light: #F2E8DE;
+  --color-rose-blush-light: #D4A5A9;
+  --color-rose-gold-light: #D4B896;
+  --color-rose-gold-dark: #96704F;
+  --color-mauve: #A66B72;
+  --color-mauve-dark: #8F575E;
+
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', 'Cairo', sans-serif;
+  --font-arabic: 'Cairo', 'Inter', sans-serif;
+  --font-script: var(--font-script), 'Caveat', cursive;
+
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+  --animate-slide-down: slide-down 0.3s ease-out;
+  --animate-scale-in: scale-in 0.2s ease-out;
+  --animate-spin-slow: spin 3s linear infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-down {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+.font-script {
+  font-family: var(--font-script), 'Caveat', cursive;
+}
+
+/* Base styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-beige) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-beige);
+  border-radius: 3px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-charcoal);
+  background-color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[dir="rtl"] body {
+  font-family: var(--font-arabic);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6 {
+  font-family: var(--font-arabic);
+  font-weight: 700;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--color-rose-gold);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-beige);
+  color: var(--color-charcoal);
+}
+
+/* Image defaults */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Transition defaults */
+a, button {
+  transition: all 0.2s ease;
+}
+
+/* RTL utilities */
+[dir="rtl"] .rtl\:flip {
+  transform: scaleX(-1);
+}
