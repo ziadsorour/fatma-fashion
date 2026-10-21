@@ -107,13 +107,14 @@ export function StoreHeader() {
 
             {/* Logo: Centered on both Mobile & Desktop */}
             <div className="flex items-center justify-center flex-shrink-0">
-              <Link href="/" className="inline-block py-1">
+              <Link href="/" className="flex items-center justify-center">
                 <Image
-                  src="/images/fatma-logo-transparent.png"
+                  src="/images/fatma-logo-transparent.svg"
                   alt="FATMA - Fashion For Girls"
-                  width={220}
-                  height={100}
-                  className="h-8 sm:h-10 md:h-12 w-auto object-contain"
+                  width={150}
+                  height={48}
+                  style={{ height: '40px', width: 'auto', maxHeight: '44px' }}
+                  className="object-contain"
                   priority
                 />
               </Link>

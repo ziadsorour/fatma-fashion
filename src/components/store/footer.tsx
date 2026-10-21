@@ -16,11 +16,12 @@ export function StoreFooter() {
           <div className="space-y-4">
             <Link href="/" className="inline-block">
               <Image
-                src="/images/fatma-logo-transparent.png"
+                src="/images/fatma-logo-transparent.svg"
                 alt="FATMA - Fashion For Girls"
-                width={170}
-                height={75}
-                className="h-10 md:h-12 w-auto object-contain"
+                width={160}
+                height={50}
+                style={{ height: '42px', width: 'auto', maxHeight: '44px' }}
+                className="object-contain"
               />
             </Link>
             <p className="text-xs md:text-sm text-charcoal/70 leading-relaxed max-w-xs">

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 95" width="300" height="95">
+  <!-- Delicate royal crown -->
+  <g fill="#A66B72" transform="translate(150, 16) scale(0.9)">
+    <!-- Base band -->
+    <path d="M -30 11 C -15 14 15 14 30 11 C 28 9 20 8 0 8 C -20 8 -28 9 -30 11 Z" />
+    <circle cx="-25" cy="11" r="1.5" fill="#FAF7F2" />
+    <circle cx="-12" cy="12" r="1.5" fill="#FAF7F2" />
+    <circle cx="0" cy="12.5" r="1.8" fill="#FAF7F2" />
+    <circle cx="12" cy="12" r="1.5" fill="#FAF7F2" />
+    <circle cx="25" cy="11" r="1.5" fill="#FAF7F2" />
+    
+    <!-- 5 Spikes with Pearls -->
+    <!-- Center -->
+    <path d="M 0 -8 L 4 8 C 2 8 -2 8 -4 8 Z" />
+    <circle cx="0" cy="-9" r="2.5" />
+    
+    <!-- Intermediate -->
+    <path d="M -14 -4 L -9 8 L -17 8 Z" />
+    <circle cx="-14" cy="-5" r="2.2" />
+    <path d="M 14 -4 L 17 8 L 9 8 Z" />
+    <circle cx="14" cy="-5" r="2.2" />
+    
+    <!-- Outer -->
+    <path d="M -27 0 L -23 9 L -29 10 Z" />
+    <circle cx="-27" cy="-1" r="1.8" />
+    <path d="M 27 0 L 29 10 L 23 9 Z" />
+    <circle cx="27" cy="-1" r="1.8" />
+  </g>
+
+  <!-- Brand Name: FATMA in Luxury Serif -->
+  <text x="150" y="62" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="700" fill="#292522" text-anchor="middle" letter-spacing="4">
+    FATMA
+  </text>
+
+  <!-- Tagline: — FASHION FOR GIRLS — -->
+  <text x="150" y="80" font-family="'Inter', Arial, sans-serif" font-size="8" font-weight="600" fill="#A66B72" text-anchor="middle" letter-spacing="3.5">
+    — FASHION FOR GIRLS —
+  </text>
+</svg>

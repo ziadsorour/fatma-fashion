@@ -156,7 +156,7 @@ export function HomepageClient({
                     : "Trendy looks, everyday comfort, made for every version of you."}
                 </p>
 
-                <div className="pt-1 sm:pt-2">
+                <div className="pt-1 sm:pt-2 flex flex-wrap items-center gap-4">
                   <Link
                     href="/shop"
                     className="inline-flex items-center gap-1.5 sm:gap-2.5 bg-[#A66B72] hover:bg-[#8F575E] text-white px-5 sm:px-7 md:px-9 py-2 sm:py-2.5 md:py-3.5 rounded-full text-[11px] sm:text-xs md:text-sm font-semibold shadow-md transition-all hover:scale-105 active:scale-95"
@@ -164,16 +164,13 @@ export function HomepageClient({
                     <span>{locale === "ar" ? "تسوقي الآن" : "Shop Now"}</span>
                     <Arrow className="w-3.5 h-3.5" />
                   </Link>
-                </div>
-              </div>
 
-              {/* Decorative script quote on opposite side */}
-              <div className="hidden lg:block">
-                <p className="font-script text-2xl lg:text-3xl text-charcoal/70 drop-shadow-sm select-none">
-                  {locale === "ar"
-                    ? "ملابس أنيقة لمزاج أفضل ♡"
-                    : "Good Clothes Better Mood ♡"}
-                </p>
+                  <p className="font-script text-base sm:text-xl md:text-2xl text-[#A66B72] select-none">
+                    {locale === "ar"
+                      ? "ملابس أنيقة لمزاج أفضل ♡"
+                      : "Good Clothes Better Mood ♡"}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
