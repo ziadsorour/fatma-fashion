@@ -18,10 +18,10 @@ export function StoreFooter() {
               <Image
                 src="/images/fatma-logo-transparent.png"
                 alt="FATMA - Fashion For Girls"
-                width={180}
-                height={105}
-                style={{ height: '54px', width: 'auto', maxHeight: '58px' }}
-                className="object-contain"
+                width={240}
+                height={140}
+                style={{ width: 'auto' }}
+                className="h-[60px] sm:h-[68px] w-auto object-contain"
               />
             </Link>
             <p className="text-xs md:text-sm text-charcoal/70 leading-relaxed max-w-xs">

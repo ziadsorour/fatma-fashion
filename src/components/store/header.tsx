@@ -67,125 +67,131 @@ export function StoreHeader() {
       <AnnouncementBar />
       <header className="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-[#EFE9DF]">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
-            {/* Mobile: Hamburger Left (or Right in RTL) */}
-            <div className="flex items-center md:hidden">
-              <button
-                className="p-2 -ms-2 text-charcoal hover:text-[#A66B72] transition-colors"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Toggle menu"
-              >
-                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
+          <div className="flex items-center justify-between min-h-[64px] sm:min-h-[72px] md:min-h-[84px] py-1">
+            {/* Left Column: Mobile Hamburger (w-24) / Desktop Nav Links (flex-1) */}
+            <div className="w-24 md:w-auto md:flex-1 flex items-center">
+              {/* Mobile: Hamburger Left (or Right in RTL) */}
+              <div className="flex items-center md:hidden">
+                <button
+                  className="p-2 -ms-2 text-charcoal hover:text-[#A66B72] transition-colors"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  aria-label="Toggle menu"
+                >
+                  {mobileMenuOpen ? <X className="h-6 w-6 stroke-[1.6]" /> : <Menu className="h-6 w-6 stroke-[1.6]" />}
+                </button>
+              </div>
+
+              {/* Desktop Left: Search input + Links */}
+              <div className="hidden md:flex items-center gap-6 w-full">
+                {/* Search Pill */}
+                <form action="/shop" method="GET" className="relative w-64">
+                  <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-charcoal/40" />
+                  <input
+                    type="search"
+                    name="q"
+                    placeholder={locale === 'ar' ? 'ابحثي عن ستايلك...' : 'Search for your favorite style...'}
+                    className="w-full h-9 ps-8 pe-4 rounded-full border border-[#E8D7C9] bg-[#FAF7F2] text-xs text-charcoal focus:outline-none focus:border-charcoal/40 placeholder:text-charcoal/40"
+                  />
+                </form>
+
+                <nav className="flex items-center gap-6">
+                  <Link href="/" className="text-sm font-medium text-charcoal hover:text-[#A66B72] transition-colors border-b-2 border-charcoal pb-0.5">
+                    {t('nav.home')}
+                  </Link>
+                  <Link href="/shop" className="text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors">
+                    {t('nav.shop')}
+                  </Link>
+                  <Link href="/shop?collection=featured" className="text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors">
+                    {locale === 'ar' ? 'المجموعات' : 'Collections'}
+                  </Link>
+                </nav>
+              </div>
             </div>
 
-            {/* Desktop Left: Search input + Links */}
-            <div className="hidden md:flex items-center gap-6 flex-1">
-              {/* Search Pill */}
-              <form action="/shop" method="GET" className="relative w-64">
-                <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-charcoal/40" />
-                <input
-                  type="search"
-                  name="q"
-                  placeholder={locale === 'ar' ? 'ابحثي عن ستايلك...' : 'Search for your favorite style...'}
-                  className="w-full h-9 ps-8 pe-4 rounded-full border border-[#E8D7C9] bg-[#FAF7F2] text-xs text-charcoal focus:outline-none focus:border-charcoal/40 placeholder:text-charcoal/40"
-                />
-              </form>
-
-              <nav className="flex items-center gap-6">
-                <Link href="/" className="text-sm font-medium text-charcoal hover:text-[#A66B72] transition-colors border-b-2 border-charcoal pb-0.5">
-                  {t('nav.home')}
-                </Link>
-                <Link href="/shop" className="text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors">
-                  {t('nav.shop')}
-                </Link>
-                <Link href="/shop?collection=featured" className="text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors">
-                  {locale === 'ar' ? 'المجموعات' : 'Collections'}
-                </Link>
-              </nav>
-            </div>
-
-            {/* Logo: Centered on both Mobile & Desktop */}
-            <div className="flex items-center justify-center flex-shrink-0">
+            {/* Logo: Prominent, Centered on Mobile & Desktop */}
+            <div className="flex items-center justify-center flex-1 md:flex-initial px-1">
               <Link href="/" className="flex items-center justify-center py-0.5">
                 <Image
                   src="/images/fatma-logo-transparent.png"
                   alt="FATMA - Fashion For Girls"
-                  width={180}
-                  height={105}
-                  style={{ height: '48px', width: 'auto', maxHeight: '52px' }}
-                  className="h-9 sm:h-11 md:h-12 w-auto object-contain"
+                  width={260}
+                  height={150}
+                  style={{ width: 'auto' }}
+                  className="h-[58px] sm:h-[68px] md:h-[76px] max-h-[80px] w-auto object-contain transition-transform hover:scale-105 duration-200"
                   priority
                 />
               </Link>
             </div>
 
-            {/* Desktop Right: About Us, Contact, Language, Account, Cart */}
-            <div className="hidden md:flex items-center justify-end gap-5 flex-1">
-              <nav className="flex items-center gap-6">
-                <Link href="/pages/about" className="text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors">
-                  {locale === 'ar' ? 'عنّا' : 'About Us'}
+            {/* Right Column: Desktop Account/Cart (flex-1) / Mobile 3-icons (w-24) */}
+            <div className="w-24 md:w-auto md:flex-1 flex items-center justify-end">
+              {/* Desktop Right: About Us, Contact, Language, Account, Cart */}
+              <div className="hidden md:flex items-center justify-end gap-5 w-full">
+                <nav className="flex items-center gap-6">
+                  <Link href="/pages/about" className="text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors">
+                    {locale === 'ar' ? 'عنّا' : 'About Us'}
+                  </Link>
+                  <Link href="/contact" className="text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors">
+                    {t('nav.contact')}
+                  </Link>
+                </nav>
+
+                <span className="text-charcoal/20">|</span>
+
+                <button
+                  onClick={() => setLocale(locale === 'ar' ? 'en' : 'ar')}
+                  className="flex items-center gap-1 text-xs text-charcoal/70 hover:text-charcoal transition-colors px-2 py-1 rounded border border-[#E8D7C9]"
+                  aria-label="Switch language"
+                >
+                  <Globe className="h-3.5 w-3.5" />
+                  <span>{locale === 'ar' ? 'EN' : 'عربي'}</span>
+                </button>
+
+                <Link href="/account" className="text-charcoal hover:text-[#A66B72] transition-colors p-1" aria-label="Account">
+                  <User className="h-5 w-5" />
                 </Link>
-                <Link href="/contact" className="text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors">
-                  {t('nav.contact')}
+
+                <Link href="/account/wishlist" className="text-charcoal hover:text-[#A66B72] transition-colors relative p-1" aria-label="Wishlist">
+                  <Heart className="h-5 w-5 stroke-[1.6]" />
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-1 -end-1 bg-[#A66B72] text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
+                      {wishlistCount}
+                    </span>
+                  )}
                 </Link>
-              </nav>
 
-              <span className="text-charcoal/20">|</span>
-
-              <button
-                onClick={() => setLocale(locale === 'ar' ? 'en' : 'ar')}
-                className="flex items-center gap-1 text-xs text-charcoal/70 hover:text-charcoal transition-colors px-2 py-1 rounded border border-[#E8D7C9]"
-                aria-label="Switch language"
-              >
-                <Globe className="h-3.5 w-3.5" />
-                <span>{locale === 'ar' ? 'EN' : 'عربي'}</span>
-              </button>
-
-              <Link href="/account" className="text-charcoal hover:text-[#A66B72] transition-colors p-1" aria-label="Account">
-                <User className="h-5 w-5" />
-              </Link>
-
-              <Link href="/account/wishlist" className="text-charcoal hover:text-[#A66B72] transition-colors relative p-1" aria-label="Wishlist">
-                <Heart className="h-5 w-5" />
-                {wishlistCount > 0 && (
-                  <span className="absolute -top-1 -end-1 bg-[#A66B72] text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
-                    {wishlistCount}
+                <Link href="/cart" className="text-charcoal hover:text-[#A66B72] transition-colors relative p-1" aria-label="Cart">
+                  <ShoppingBag className="h-5 w-5 stroke-[1.6]" />
+                  <span className="absolute -top-1 -end-1 bg-charcoal text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
+                    {cartCount}
                   </span>
-                )}
-              </Link>
+                </Link>
+              </div>
 
-              <Link href="/cart" className="text-charcoal hover:text-[#A66B72] transition-colors relative p-1" aria-label="Cart">
-                <ShoppingBag className="h-5 w-5" />
-                <span className="absolute -top-1 -end-1 bg-charcoal text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
-                  {cartCount}
-                </span>
-              </Link>
-            </div>
-
-            {/* Mobile Right: Search, Wishlist, Cart */}
-            <div className="flex md:hidden items-center gap-1.5">
-              <button
-                onClick={() => setSearchOpen(!searchOpen)}
-                className="p-1.5 text-charcoal hover:text-[#A66B72]"
-                aria-label="Search"
-              >
-                <Search className="h-5 w-5" />
-              </button>
-              <Link href="/account/wishlist" className="p-1.5 text-charcoal relative" aria-label="Wishlist">
-                <Heart className="h-5 w-5" />
-                {wishlistCount > 0 && (
-                  <span className="absolute -top-1 -end-1 bg-[#A66B72] text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
-                    {wishlistCount}
+              {/* Mobile Right: Search, Wishlist, Cart */}
+              <div className="flex md:hidden items-center justify-end gap-1.5">
+                <button
+                  onClick={() => setSearchOpen(!searchOpen)}
+                  className="p-1.5 text-charcoal hover:text-[#A66B72] transition-colors"
+                  aria-label="Search"
+                >
+                  <Search className="h-5 w-5 stroke-[1.6]" />
+                </button>
+                <Link href="/account/wishlist" className="p-1.5 text-charcoal hover:text-[#A66B72] transition-colors relative" aria-label="Wishlist">
+                  <Heart className="h-5 w-5 stroke-[1.6]" />
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-1 -end-1 bg-[#A66B72] text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
+                      {wishlistCount}
+                    </span>
+                  )}
+                </Link>
+                <Link href="/cart" className="p-1.5 text-charcoal hover:text-[#A66B72] transition-colors relative" aria-label="Cart">
+                  <ShoppingBag className="h-5 w-5 stroke-[1.6]" />
+                  <span className="absolute -top-1 -end-1 bg-charcoal text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
+                    {cartCount}
                   </span>
-                )}
-              </Link>
-              <Link href="/cart" className="p-1.5 text-charcoal relative" aria-label="Cart">
-                <ShoppingBag className="h-5 w-5" />
-                <span className="absolute -top-1 -end-1 bg-charcoal text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
-                  {cartCount}
-                </span>
-              </Link>
+                </Link>
+              </div>
             </div>
           </div>
 
