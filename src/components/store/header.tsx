@@ -23,7 +23,7 @@ export function AnnouncementBar({ message }: { message?: string }) {
   const { t } = useI18n();
   const text = message || t('announcement.freeShipping', { amount: '1,000' });
   return (
-    <div className="bg-[#FAF7F2] border-b border-[#EFE9DF] text-charcoal/80 text-[11px] sm:text-xs py-1.5 sm:py-2">
+    <div className="bg-[#FAF7F2] text-charcoal/80 text-[11px] sm:text-xs py-1.5 sm:py-2">
       <div className="container mx-auto px-4 flex items-center justify-center sm:justify-between">
         <p className="flex items-center gap-1.5 text-[11px] sm:text-xs text-charcoal/80 font-medium">
           <span>🚚</span>
@@ -65,7 +65,7 @@ export function StoreHeader() {
   return (
     <>
       <AnnouncementBar />
-      <header className="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-[#EFE9DF]">
+      <header className="bg-white/95 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between min-h-[64px] sm:min-h-[72px] md:min-h-[84px] py-1">
             {/* Left Column: Mobile Hamburger (w-24) / Desktop Nav Links (flex-1) */}
@@ -108,16 +108,16 @@ export function StoreHeader() {
               </div>
             </div>
 
-            {/* Logo: Prominent, Centered on Mobile & Desktop */}
+            {/* Logo: Prominent, Centered on Mobile & Desktop - completely frameless */}
             <div className="flex items-center justify-center flex-1 md:flex-initial px-1">
-              <Link href="/" className="flex items-center justify-center py-0.5">
+              <Link href="/" className="flex items-center justify-center py-0.5 outline-none focus:outline-none border-0 ring-0 select-none">
                 <Image
                   src="/images/fatma-logo-transparent.png"
                   alt="FATMA - Fashion For Girls"
                   width={260}
-                  height={150}
+                  height={140}
                   style={{ width: 'auto' }}
-                  className="h-[58px] sm:h-[68px] md:h-[76px] max-h-[80px] w-auto object-contain transition-transform hover:scale-105 duration-200"
+                  className="h-[58px] sm:h-[68px] md:h-[76px] max-h-[80px] w-auto object-contain transition-transform hover:scale-105 duration-200 border-none outline-none ring-0 shadow-none"
                   priority
                 />
               </Link>
