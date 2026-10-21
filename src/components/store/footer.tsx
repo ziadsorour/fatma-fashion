@@ -14,13 +14,13 @@ export function StoreFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           {/* Brand & About */}
           <div className="space-y-4">
-            <Link href="/" className="inline-block">
+            <Link href="/" className="inline-block py-1">
               <Image
-                src="/images/fatma-logo-transparent.svg"
+                src="/images/fatma-logo-transparent.png"
                 alt="FATMA - Fashion For Girls"
-                width={160}
-                height={50}
-                style={{ height: '42px', width: 'auto', maxHeight: '44px' }}
+                width={180}
+                height={105}
+                style={{ height: '54px', width: 'auto', maxHeight: '58px' }}
                 className="object-contain"
               />
             </Link>
