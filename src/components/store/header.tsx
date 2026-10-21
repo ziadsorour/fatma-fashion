@@ -64,7 +64,6 @@ export function StoreHeader() {
 
   return (
     <>
-      <AnnouncementBar />
       <header className="bg-white/95 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between min-h-[64px] sm:min-h-[72px] md:min-h-[84px] py-1">

@@ -174,10 +174,6 @@ export default function CartPage() {
               <Link href="/shop" className="block text-center text-sm text-rose-gold hover:text-rose-gold-dark mt-3">
                 {t('cart.continueShopping')}
               </Link>
-
-              <p className="text-[10px] text-charcoal/40 text-center mt-4">
-                {t('cart.freeShippingNote', { amount: '1,000' })}
-              </p>
             </div>
           </div>
         </div>
