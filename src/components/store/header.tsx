@@ -3,26 +3,40 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useI18n } from "@/i18n";
 import { useCartStore } from "@/stores/cart-store";
 import { useWishlistStore } from "@/stores/wishlist-store";
-import { Search, Heart, ShoppingBag, User, Menu, X, Globe } from "lucide-react";
-import { cn } from "@/lib/utils";
+import {
+  Search,
+  Heart,
+  ShoppingBag,
+  User,
+  Menu,
+  X,
+  Globe,
+  Home,
+  LayoutGrid,
+} from "lucide-react";
 
 export function AnnouncementBar({ message }: { message?: string }) {
   const { t } = useI18n();
   const text = message || t('announcement.freeShipping', { amount: '1,000' });
   return (
-    <div className="bg-[#FAF7F2] border-b border-[#EFE9DF] text-charcoal/80 text-xs py-2">
-      <div className="container mx-auto px-4 flex items-center justify-between">
-        <p className="flex items-center gap-2 text-xs text-charcoal/70">
+    <div className="bg-[#FAF7F2] border-b border-[#EFE9DF] text-charcoal/80 text-[11px] sm:text-xs py-1.5 sm:py-2">
+      <div className="container mx-auto px-4 flex items-center justify-center sm:justify-between">
+        <p className="flex items-center gap-1.5 text-[11px] sm:text-xs text-charcoal/80 font-medium">
           <span>🚚</span>
           <span>{text}</span>
         </p>
         <div className="hidden sm:flex items-center gap-4 text-xs text-charcoal/60">
-          <Link href="/track-order" className="hover:text-charcoal transition-colors">{t('nav.trackOrder')}</Link>
+          <Link href="/track-order" className="hover:text-charcoal transition-colors">
+            {t('nav.trackOrder')}
+          </Link>
           <span className="text-charcoal/20">|</span>
-          <Link href="/faq" className="hover:text-charcoal transition-colors">{t('nav.help')}</Link>
+          <Link href="/faq" className="hover:text-charcoal transition-colors">
+            {t('nav.help')}
+          </Link>
           <span className="text-charcoal/20">|</span>
           <div className="flex items-center gap-2.5">
             <Link href="https://instagram.com" target="_blank" aria-label="Instagram" className="hover:text-charcoal">
@@ -53,11 +67,11 @@ export function StoreHeader() {
       <AnnouncementBar />
       <header className="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-[#EFE9DF]">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Mobile: Hamburger Left */}
+          <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
+            {/* Mobile: Hamburger Left (or Right in RTL) */}
             <div className="flex items-center md:hidden">
               <button
-                className="p-2 -ms-2 text-charcoal hover:text-charcoal/70"
+                className="p-2 -ms-2 text-charcoal hover:text-[#A66B72] transition-colors"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -97,9 +111,9 @@ export function StoreHeader() {
                 <Image
                   src="/images/fatma-logo-transparent.png"
                   alt="FATMA - Fashion For Girls"
-                  width={180}
-                  height={80}
-                  className="h-9 md:h-12 w-auto object-contain"
+                  width={220}
+                  height={100}
+                  className="h-8 sm:h-10 md:h-12 w-auto object-contain"
                   priority
                 />
               </Link>
@@ -149,10 +163,10 @@ export function StoreHeader() {
             </div>
 
             {/* Mobile Right: Search, Wishlist, Cart */}
-            <div className="flex md:hidden items-center gap-2">
+            <div className="flex md:hidden items-center gap-1.5">
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="p-1.5 text-charcoal"
+                className="p-1.5 text-charcoal hover:text-[#A66B72]"
                 aria-label="Search"
               >
                 <Search className="h-5 w-5" />
@@ -176,14 +190,14 @@ export function StoreHeader() {
 
           {/* Mobile Search Input dropdown */}
           {searchOpen && (
-            <div className="py-3 md:hidden border-t border-[#EFE9DF]">
+            <div className="py-2.5 md:hidden border-t border-[#EFE9DF]">
               <form action="/shop" method="GET" className="relative">
                 <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-charcoal/40" />
                 <input
                   type="search"
                   name="q"
                   placeholder={locale === 'ar' ? 'ابحثي عن ستايلك...' : 'Search for your favorite style...'}
-                  className="w-full h-10 ps-10 pe-4 rounded-full border border-[#E8D7C9] bg-[#FAF7F2] text-sm focus:outline-none focus:border-charcoal"
+                  className="w-full h-9 ps-9 pe-4 rounded-full border border-[#E8D7C9] bg-[#FAF7F2] text-xs focus:outline-none focus:border-charcoal"
                   autoFocus
                 />
               </form>
@@ -193,58 +207,65 @@ export function StoreHeader() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[#EFE9DF] bg-white">
-            <nav className="container mx-auto px-4 py-4 space-y-2">
+          <div className="md:hidden border-t border-[#EFE9DF] bg-white shadow-xl animate-slide-down">
+            <nav className="container mx-auto px-5 py-4 space-y-2.5">
               <Link
                 href="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-sm font-semibold text-charcoal hover:text-[#A66B72]"
+                className="block py-2 text-sm font-bold text-charcoal hover:text-[#A66B72] border-b border-[#F4ECE6]"
               >
                 {t('nav.home')}
               </Link>
               <Link
                 href="/shop"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-sm text-charcoal/80 hover:text-charcoal"
+                className="block py-2 text-sm font-medium text-charcoal/80 hover:text-charcoal border-b border-[#F4ECE6]"
               >
                 {t('nav.shop')}
               </Link>
               <Link
                 href="/shop?collection=featured"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-sm text-charcoal/80 hover:text-charcoal"
+                className="block py-2 text-sm font-medium text-charcoal/80 hover:text-charcoal border-b border-[#F4ECE6]"
               >
                 {locale === 'ar' ? 'المجموعات' : 'Collections'}
               </Link>
               <Link
                 href="/pages/about"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-sm text-charcoal/80 hover:text-charcoal"
+                className="block py-2 text-sm font-medium text-charcoal/80 hover:text-charcoal border-b border-[#F4ECE6]"
               >
                 {locale === 'ar' ? 'عنّا' : 'About Us'}
               </Link>
               <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-sm text-charcoal/80 hover:text-charcoal"
+                className="block py-2 text-sm font-medium text-charcoal/80 hover:text-charcoal border-b border-[#F4ECE6]"
               >
                 {t('nav.contact')}
               </Link>
-              <div className="pt-3 border-t border-[#EFE9DF] flex items-center justify-between">
+              <Link
+                href="/track-order"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 text-sm font-medium text-charcoal/80 hover:text-charcoal border-b border-[#F4ECE6]"
+              >
+                {t('nav.trackOrder')}
+              </Link>
+              <div className="pt-3 flex items-center justify-between">
                 <button
                   onClick={() => {
                     setLocale(locale === 'ar' ? 'en' : 'ar');
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center gap-1.5 text-xs text-charcoal font-medium"
+                  className="flex items-center gap-1.5 text-xs text-charcoal font-semibold px-3 py-1.5 rounded-full border border-[#E8D7C9] bg-[#FAF7F2]"
                 >
-                  <Globe className="h-4 w-4" />
-                  <span>{locale === 'ar' ? 'English (EN)' : 'العربية (AR)'}</span>
+                  <Globe className="h-3.5 w-3.5 text-[#A66B72]" />
+                  <span>{locale === 'ar' ? 'Switch to English' : 'التحويل للعربية'}</span>
                 </button>
                 <Link
                   href="/account"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-xs text-[#A66B72] font-semibold"
+                  className="text-xs text-[#A66B72] font-bold"
                 >
                   {t('common.account')}
                 </Link>
@@ -258,26 +279,47 @@ export function StoreHeader() {
 }
 
 export function MobileBottomNav() {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
+  const pathname = usePathname();
+  const cartCount = useCartStore((s) => s.getItemCount());
+  const wishlistCount = useWishlistStore((s) => s.getItemCount());
+
+  const navItems = [
+    { href: "/", label: t('nav.home'), icon: Home, active: pathname === "/" },
+    { href: "/shop", label: t('nav.shop'), icon: LayoutGrid, active: pathname.startsWith("/shop") },
+    { href: "/account/wishlist", label: t('common.wishlist'), icon: Heart, badge: wishlistCount, active: pathname === "/account/wishlist" },
+    { href: "/cart", label: t('common.cart'), icon: ShoppingBag, badge: cartCount, active: pathname === "/cart" },
+    { href: "/account", label: t('common.account'), icon: User, active: pathname.startsWith("/account") && pathname !== "/account/wishlist" },
+  ];
+
   return (
-    <nav className="md:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-[#EFE9DF] z-40 py-2">
-      <div className="grid grid-cols-4 text-center">
-        <Link href="/" className="flex flex-col items-center gap-0.5 text-[#A66B72]">
-          <span className="text-base">🏠</span>
-          <span className="text-[10px] font-medium">{t('nav.home')}</span>
-        </Link>
-        <Link href="/shop" className="flex flex-col items-center gap-0.5 text-charcoal/60 hover:text-charcoal">
-          <span className="text-base">⊞</span>
-          <span className="text-[10px]">{t('nav.shop')}</span>
-        </Link>
-        <Link href="/account/wishlist" className="flex flex-col items-center gap-0.5 text-charcoal/60 hover:text-charcoal">
-          <span className="text-base">♡</span>
-          <span className="text-[10px]">{t('common.wishlist')}</span>
-        </Link>
-        <Link href="/account" className="flex flex-col items-center gap-0.5 text-charcoal/60 hover:text-charcoal">
-          <span className="text-base">👤</span>
-          <span className="text-[10px]">{t('common.account')}</span>
-        </Link>
+    <nav className="md:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-[#E8D7C9] z-40 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] shadow-lg">
+      <div className="grid grid-cols-5 text-center items-center">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          const isActive = item.active;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`flex flex-col items-center justify-center gap-1 relative py-1 transition-colors ${
+                isActive ? "text-[#A66B72]" : "text-charcoal/60 hover:text-charcoal"
+              }`}
+            >
+              <div className="relative">
+                <Icon className={`w-5 h-5 ${isActive ? "stroke-[2.5]" : "stroke-[1.75]"}`} />
+                {item.badge !== undefined && item.badge > 0 && (
+                  <span className="absolute -top-1.5 -end-2 bg-[#A66B72] text-white text-[9px] font-bold rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center">
+                    {item.badge}
+                  </span>
+                )}
+              </div>
+              <span className={`text-[10px] ${isActive ? "font-bold text-[#A66B72]" : "font-medium"}`}>
+                {item.label}
+              </span>
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );
