@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -59,8 +59,16 @@ export function StoreHeader() {
   const { t, locale, setLocale } = useI18n();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const cartCount = useCartStore((s) => s.getItemCount());
-  const wishlistCount = useWishlistStore((s) => s.getItemCount());
+  const rawCartCount = useCartStore((s) => s.getItemCount());
+  const rawWishlistCount = useWishlistStore((s) => s.getItemCount());
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const cartCount = mounted ? rawCartCount : 0;
+  const wishlistCount = mounted ? rawWishlistCount : 0;
 
   return (
     <>
@@ -287,8 +295,16 @@ export function StoreHeader() {
 export function MobileBottomNav() {
   const { t } = useI18n();
   const pathname = usePathname();
-  const cartCount = useCartStore((s) => s.getItemCount());
-  const wishlistCount = useWishlistStore((s) => s.getItemCount());
+  const rawCartCount = useCartStore((s) => s.getItemCount());
+  const rawWishlistCount = useWishlistStore((s) => s.getItemCount());
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const cartCount = mounted ? rawCartCount : 0;
+  const wishlistCount = mounted ? rawWishlistCount : 0;
 
   const navItems = [
     { href: "/", label: t('nav.home'), icon: Home, active: pathname === "/" },

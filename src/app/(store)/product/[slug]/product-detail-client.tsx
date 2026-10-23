@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useI18n } from "@/i18n";
@@ -48,11 +48,16 @@ export function ProductDetailClient({ product, relatedProducts }: Props) {
     return product.variants.find((v: any) => v.size === selectedSize && v.color_name_en === selectedColor);
   }, [product.variants, selectedSize, selectedColor]);
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const availableStock = selectedVariant ? selectedVariant.available : 0;
   const displayPrice = product.sale_price || product.price;
   const variantPrice = selectedVariant?.price_override || displayPrice;
   const discount = product.sale_price ? Math.round(((product.price - product.sale_price) / product.price) * 100) : 0;
-  const wishlisted = isInWishlist(product.id);
+  const wishlisted = mounted ? isInWishlist(product.id) : false;
 
   const images = product.images.length > 0 ? product.images : [{ url: '/images/fatma-logo.jpg', alt_text_en: name }];
 
@@ -313,8 +318,8 @@ export function ProductDetailClient({ product, relatedProducts }: Props) {
                 <AccordionContent>
                   <p className="text-sm text-charcoal/70">
                     {locale === 'ar'
-                      ? 'التوصيل خلال ٣-٥ أيام عمل. شحن مجاني للطلبات فوق ١,٠٠٠ ج.م.'
-                      : 'Delivery within 3-5 business days. Free shipping on orders above EGP 1,000.'}
+                      ? 'التوصيل خلال ٣-٥ أيام عمل.'
+                      : 'Delivery within 3-5 business days.'}
                   </p>
                 </AccordionContent>
               </AccordionItem>

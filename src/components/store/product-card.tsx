@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Heart, ShoppingBag, Eye } from "lucide-react";
@@ -47,7 +48,13 @@ export function ProductCard({
   const name = locale === 'ar' ? nameAr : nameEn;
   const addToCart = useCartStore((s) => s.addItem);
   const { toggleItem, isInWishlist } = useWishlistStore();
-  const wishlisted = isInWishlist(id);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const wishlisted = mounted ? isInWishlist(id) : false;
 
   const displayPrice = salePrice || price;
   const discount = salePrice ? Math.round(((price - salePrice) / price) * 100) : 0;

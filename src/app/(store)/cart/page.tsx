@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Trash2, Minus, Plus, ShoppingBag, ArrowRight, ArrowLeft, Tag } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "@/components/ui/toast";
 
 export default function CartPage() {
@@ -17,6 +17,11 @@ export default function CartPage() {
   const [couponInput, setCouponInput] = useState('');
   const [couponLoading, setCouponLoading] = useState(false);
   const Arrow = dir === 'rtl' ? ArrowLeft : ArrowRight;
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const subtotal = getSubtotal();
   const discount = couponDiscount;
@@ -43,6 +48,14 @@ export default function CartPage() {
     }
     setCouponLoading(false);
   };
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-cream py-12 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-gold" />
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (

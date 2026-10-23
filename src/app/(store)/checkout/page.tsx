@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useI18n } from "@/i18n";
@@ -19,7 +19,12 @@ export default function CheckoutPage() {
   const Arrow = dir === 'rtl' ? ChevronLeft : ChevronRight;
 
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [orderComplete, setOrderComplete] = useState<any>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const [form, setForm] = useState({
     fullName: '', phone: '', email: '', governorate: '', city: '', address: '', building: '',
     deliveryInstructions: '', paymentMethod: 'cod', notes: '', termsAccepted: false,
@@ -98,6 +103,14 @@ export default function CheckoutPage() {
             <Button asChild className="flex-1"><Link href="/shop">{t('cart.continueShopping')}</Link></Button>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-cream flex items-center justify-center p-4">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-gold" />
       </div>
     );
   }
