@@ -169,9 +169,11 @@ export function StoreHeader() {
 
                 <Link href="/cart" className="text-charcoal hover:text-[#A66B72] transition-colors relative p-1" aria-label="Cart">
                   <ShoppingBag className="h-5 w-5 stroke-[1.6]" />
-                  <span className="absolute -top-1 -end-1 bg-charcoal text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
-                    {cartCount}
-                  </span>
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -end-1 bg-charcoal text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
+                      {cartCount}
+                    </span>
+                  )}
                 </Link>
               </div>
 
@@ -194,9 +196,11 @@ export function StoreHeader() {
                 </Link>
                 <Link href="/cart" className="p-1.5 text-charcoal hover:text-[#A66B72] transition-colors relative" aria-label="Cart">
                   <ShoppingBag className="h-5 w-5 stroke-[1.6]" />
-                  <span className="absolute -top-1 -end-1 bg-charcoal text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
-                    {cartCount}
-                  </span>
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -end-1 bg-charcoal text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
+                      {cartCount}
+                    </span>
+                  )}
                 </Link>
               </div>
             </div>
