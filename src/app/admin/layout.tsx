@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toast";
@@ -29,7 +29,18 @@ const sidebarLinks = [
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      router.push('/auth/login');
+      router.refresh();
+    } catch (e) {
+      console.error('Logout error:', e);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex" dir="ltr">
@@ -86,7 +97,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Globe className="h-4 w-4" />
               <span>View Store</span>
             </Link>
-            <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/40 hover:text-red-400 hover:bg-white/5 transition-colors">
+            <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/40 hover:text-red-400 hover:bg-white/5 transition-colors">
               <LogOut className="h-4 w-4" />
               <span>Logout</span>
             </button>
